@@ -1,0 +1,9 @@
+TemplateContainer {
+    height: 100%;
+}
+
+Label {
+    font-size: 14px;
+    white-space: normal;
+    margin: 0px 3px 0px 3px;
+}

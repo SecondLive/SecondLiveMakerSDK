@@ -1,0 +1,18 @@
+{
+    "name": "SecondLive.Maker.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a8de9b3cc4e86d64c9e92b208021937f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

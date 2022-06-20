@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.secondlive.maker/Editor/UI/Uss/SpaceWindow.uss?fileID=7433441132597879392&amp;guid=2727ad0dce41dd24f8ab495fc6bac19f&amp;type=3#SpaceWindow" />
+    <ui:TwoPaneSplitView fixed-pane-initial-dimension="250">
+        <ui:VisualElement>
+            <ui:Label text="Space" display-tooltip-when-elided="true" />
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:Button text="New" display-tooltip-when-elided="true" name="new_space_button" />
+                <ui:Button text="Management" display-tooltip-when-elided="true" name="management_button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Separator" class="separator" />
+            <ui:Label text="Space already created" display-tooltip-when-elided="true" />
+            <ui:ListView focusable="true" name="space_list" style="height: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="info_panel" style="display: flex;">
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:VisualElement style="width: 50%; justify-content: flex-start;">
+                    <ui:Label display-tooltip-when-elided="true" name="image_label" style="max-width: none; min-width: 256px; min-height: 144px; -unity-text-align: middle-center; height: 163px;" />
+                    <ui:Button text="Upload Cover Image" display-tooltip-when-elided="true" name="open_image_button" style="white-space: normal; margin-top: 20px;" />
+                    <ui:Label text="*Preferred image resolution 1920*1080" display-tooltip-when-elided="true" style="height: auto; margin-top: 14px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="width: 50%; justify-content: flex-start;">
+                    <ui:TextField picking-mode="Ignore" value="filler text" text="filler text" name="guid_input" />
+                    <ui:Label text="Name" display-tooltip-when-elided="true" />
+                    <ui:TextField picking-mode="Ignore" name="name_input" />
+                    <ui:Label text="Introduce" display-tooltip-when-elided="true" />
+                    <ui:TextField picking-mode="Ignore" max-length="255" multiline="true" name="introduce_input" style="height: 114px; min-height: 105px;" />
+                    <ui:Label text="*Within 255 characters" display-tooltip-when-elided="true" />
+                    <ui:VisualElement style="flex-direction: row; flex-grow: 0; align-items: center; justify-content: flex-start;">
+                        <ui:Button text="Apply" display-tooltip-when-elided="true" name="apply_button" />
+                        <ui:Button text="Revert" display-tooltip-when-elided="true" name="revert_button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:IMGUIContainer name="upload_space_container" style="margin-left: 10px; margin-right: 10px; margin-top: 8px; padding-left: 0; padding-right: 0;" />
+        </ui:VisualElement>
+    </ui:TwoPaneSplitView>
+</ui:UXML>

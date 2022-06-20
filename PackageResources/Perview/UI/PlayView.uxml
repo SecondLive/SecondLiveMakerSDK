@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement picking-mode="Ignore" style="height: 100%; width: 100%; flex-direction: column-reverse;">
+        <ui:Label text="Pressed [V] switch camera" display-tooltip-when-elided="true" enable-rich-text="false" picking-mode="Ignore" style="-unity-text-align: middle-center; font-size: 24px; -unity-font-style: bold; color: rgb(12, 51, 7); -unity-text-outline-width: 0; flex-direction: column; padding-bottom: 0; margin-bottom: 20px;" />
+    </ui:VisualElement>
+</ui:UXML>

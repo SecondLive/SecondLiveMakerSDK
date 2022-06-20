@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="login_panel" style="display: none; height: auto; justify-content: flex-start;">
+        <ui:Button text="Get Token" display-tooltip-when-elided="true" name="get_token_button" style="margin-top: 6px;" />
+        <ui:Label text="Input token tip" display-tooltip-when-elided="true" name="token_input_tip" style="-unity-text-align: middle-left;" />
+        <ui:TextField picking-mode="Ignore" focusable="true" multiline="false" name="token_input" binding-path="m_Token" style="-unity-text-align: middle-left; white-space: nowrap; flex-wrap: nowrap; display: flex;" />
+        <ui:Label display-tooltip-when-elided="true" name="message_txt" binding-path="m_Message" style="display: flex; -unity-text-align: middle-left; color: rgb(0, 0, 0);" />
+        <ui:Button text="Sign In" display-tooltip-when-elided="true" name="login_button" style="justify-content: flex-start;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="logout_panel" style="display: flex; height: auto; visibility: visible;">
+        <ui:Label text="Token" display-tooltip-when-elided="true" />
+        <ui:TextField picking-mode="Ignore" readonly="true" name="token_label" class="readonly_textfield" />
+        <ui:Label text="User name" display-tooltip-when-elided="true" />
+        <ui:TextField picking-mode="Ignore" readonly="true" name="username_label" />
+        <ui:Button text="logout" display-tooltip-when-elided="true" name="logout_button" style="visibility: visible; display: flex;" />
+    </ui:VisualElement>
+</ui:UXML>
