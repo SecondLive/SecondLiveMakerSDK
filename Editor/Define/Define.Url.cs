@@ -10,8 +10,8 @@ namespace SecondLive.Maker.Editor
     {
         public static class Url
         {
-            public const string SECRETKEY_URL = "http://test.secondlive.org/secretkey";
-            public const string API_URL = "http://api-test.secondlive.world/backend";
+            public const string SECRETKEY_URL = "https://secondlive.world/secretkey";
+            public const string API_URL = "https://api.secondlive.world/backend";
             public const string LOGIN_URL = API_URL + "/v1/account/info";
             public const string GET_SPACES_URL = API_URL + "/v1/editor/space/list";
             public const string CREATE_SPACE_URL = API_URL + "/v1/editor/space/save";
