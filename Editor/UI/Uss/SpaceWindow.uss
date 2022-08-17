@@ -1,0 +1,19 @@
+TemplateContainer {
+    height: 100%;
+}
+
+Label {
+    font-size: 14px;
+    white-space: normal;
+    margin: 2px 8px 2px 8px;
+}
+
+Button {
+   margin: 0 8px 0px 8px;
+}
+
+.separator {
+    border-top-width: 1px;
+    border-color: black;
+    margin: 8px;
+}

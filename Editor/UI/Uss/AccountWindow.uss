@@ -1,0 +1,5 @@
+#Banner{
+    background-image: resource("Packages/com.secondlive.maker/Editor/UI/Texture/account_1.png");
+    -unity-background-scale-mode: stretch-to-fill
+}
+

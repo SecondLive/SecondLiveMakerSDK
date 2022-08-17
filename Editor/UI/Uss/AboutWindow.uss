@@ -1,0 +1,15 @@
+
+#logo{
+    background-image: resource("Packages/com.secondlive.maker/Editor/UI/Texture/about_2.png");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+#join_discord{
+    background-image: resource("Packages/com.secondlive.maker/Editor/UI/Texture/about_1_button.png");
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+
+
+
+

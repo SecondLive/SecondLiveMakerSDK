@@ -1,0 +1,51 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.secondlive.maker/Editor/UI/Uss/SpaceWindow.uss?fileID=7433441132597879392&amp;guid=2727ad0dce41dd24f8ab495fc6bac19f&amp;type=3#SpaceWindow" />
+    <ui:TwoPaneSplitView fixed-pane-initial-dimension="250" style="flex-direction: row; overflow: hidden;">
+        <ui:VisualElement style="min-width: 230px; width: auto; min-height: auto; max-width: none;">
+            <ui:Label text="Space" display-tooltip-when-elided="true" />
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:Button text="New" display-tooltip-when-elided="true" name="new_space_button" />
+                <ui:Button text="Management" display-tooltip-when-elided="true" name="management_button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Separator" class="separator" style="margin-top: 8px; margin-bottom: 5px;" />
+            <uie:ToolbarSearchField focusable="true" name="search" style="width: auto; translate: 0 0; margin-right: 10px; margin-left: 10px; margin-top: 0;" />
+            <ui:Label text="Space already created" display-tooltip-when-elided="true" />
+            <ui:ListView focusable="true" name="space_list" style="height: 100%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="info_panel" style="display: flex; min-width: 560px;">
+            <ui:VisualElement style="flex-direction: row; margin-top: 5px;">
+                <ui:VisualElement style="width: 50%; justify-content: flex-start; flex-shrink: 1; transform-origin: center;">
+                    <ui:Label display-tooltip-when-elided="true" name="image_label" style="max-width: none; min-width: 256px; min-height: 144px; -unity-text-align: middle-center; height: 163px; opacity: 1; background-image: none; -unity-background-scale-mode: stretch-to-fill; margin-left: 8px; margin-right: 8px;" />
+                    <ui:Button text="Upload Cover Image" display-tooltip-when-elided="true" name="open_image_button" style="white-space: normal; margin-top: 10px; opacity: 1; margin-bottom: 5px;" />
+                    <ui:Label text="*Preferred image resolution 1024*1024" display-tooltip-when-elided="true" style="height: auto; margin-top: 2px; margin-bottom: 5px;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="width: 50%; justify-content: flex-start;">
+                    <ui:TextField picking-mode="Ignore" value="filler text" text="filler text" name="guid_input" style="margin-top: 1px; margin-bottom: 1px;" />
+                    <ui:Label text="Name:" display-tooltip-when-elided="true" style="margin-left: 3px;" />
+                    <ui:TextField picking-mode="Ignore" name="name_input" />
+                    <ui:Label text="Introduce:" display-tooltip-when-elided="true" style="margin-left: 3px;" />
+                    <ui:TextField picking-mode="Ignore" max-length="255" multiline="true" name="introduce_input" style="height: 105px; min-height: 105px;" />
+                    <ui:Label text="*Within 255 characters" display-tooltip-when-elided="true" style="margin-left: 3px;" />
+                    <ui:VisualElement style="flex-direction: row; flex-grow: 0; align-items: center; justify-content: flex-start;">
+                        <ui:Button text="Apply" display-tooltip-when-elided="true" name="apply_button" style="margin-left: 3px;" />
+                        <ui:Button text="Revert" display-tooltip-when-elided="true" name="revert_button" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:GroupBox name="upload_space_container" style="justify-content: flex-start; height: 278px; margin-bottom: 0; padding-bottom: 0; padding-top: 0; margin-top: 3px; flex-direction: column; flex-wrap: nowrap; flex-grow: 1;">
+                <ui:VisualElement name="UploadSpace" style="align-items: flex-start; flex-direction: row; height: auto; justify-content: space-between; background-color: rgb(70, 70, 70); margin-bottom: 0; margin-top: 5px; flex-grow: 0; min-height: 90px;">
+                    <ui:Label text="Notice: The operation will overwrite the existing resource and not undo. " display-tooltip-when-elided="true" style="height: auto; width: 246px;" />
+                    <ui:Button text="Upload Resources" display-tooltip-when-elided="true" name="upload_button" style="width: 180px; top: 5px; right: 5px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; transform-origin: center;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Preview" style="align-items: flex-start; flex-direction: row; height: auto; justify-content: space-between; background-color: rgb(70, 70, 70); margin-top: 5px; margin-bottom: 0; flex-wrap: nowrap; flex-grow: 0; flex-basis: auto; min-height: 90px;">
+                    <ui:Label text="Notice: Please upload resources before preview." display-tooltip-when-elided="true" style="height: auto; width: 300px; flex-wrap: nowrap; flex-direction: column; white-space: normal; -unity-text-align: upper-left;" />
+                    <ui:Button text="Preview" display-tooltip-when-elided="true" name="preview_button" style="width: 180px; top: 5px; right: 5px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DeleteSpace" style="align-items: flex-start; flex-direction: row; height: auto; justify-content: space-between; background-color: rgb(70, 70, 70); margin-top: 5px; margin-bottom: 0; flex-grow: 0; min-height: 90px; flex-wrap: nowrap;">
+                    <ui:Label text="Notice：It cannot undo once the space is deleted." display-tooltip-when-elided="true" style="height: auto; width: 246px;" />
+                    <ui:Button text="Delete Space" display-tooltip-when-elided="true" name="delete_button" style="width: 180px; top: 5px; right: 5px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+                </ui:VisualElement>
+            </ui:GroupBox>
+        </ui:VisualElement>
+    </ui:TwoPaneSplitView>
+</ui:UXML>
