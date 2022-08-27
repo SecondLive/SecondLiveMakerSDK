@@ -56,7 +56,7 @@ namespace SecondLive.Maker.Editor
             usernameLabel.bindingPath = "m_Username";
 
             var spaceManageButton = view.Q<Button>("spaceManage_button");
-            spaceManageButton.clicked += SpaceManager.instance.ShowSpacePanel;
+            spaceManageButton.clicked += ()=> { SpaceManager.instance.ShowSpacePanel(); this.Close(); } ;
 
             var logoutButton = view.Q<Button>("logout_button");
             logoutButton.clicked += () => LogoutButtonClick?.Invoke();

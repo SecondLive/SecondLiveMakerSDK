@@ -118,7 +118,7 @@ namespace SecondLive.Maker.Editor
 
                 if (customComponentPaths.Count > 0)
                 {
-                    StringBuilder msg = new StringBuilder(Define.Text.TEXTURE_SIZE_TO_LARGE);
+                    StringBuilder msg = new StringBuilder(Define.Text.HAD_CUSTOM_MONO);
                     msg.AppendLine();
                     foreach (string path in customComponentPaths)
                         msg.Append(path + ";");
@@ -235,9 +235,18 @@ namespace SecondLive.Maker.Editor
             static async Task UploadSpaceResources(Scene scene, SpaceInfo info, string outdir)
             {
                 EditorUtility.DisplayProgressBar("Upload Aasset", "", 0);
+
+                var s3credentials = await UploadManager.instance.CheckS3Credentials(
+                SpaceManager.instance.m_SpaceWindowModel.CurrentSpaceInfo.guid);
+                if (s3credentials == null)
+                    return;
+
+                var delRequest = await RPCService.instance.DeleteSpaceFile(info.guid, 0);
+                Debug.Log(delRequest.code);
+
                 for (var i = 0; i < s_AssetBundleFilePathInfos.Count; i++)
                 {
-                    var succeed = await UploadSceneBundle(s_AssetBundleFilePathInfos[i], i, s_AssetBundleFilePathInfos.Count);
+                    var succeed = await UploadSceneBundle(s3credentials,s_AssetBundleFilePathInfos[i], i, s_AssetBundleFilePathInfos.Count);
                     if (succeed) continue;
                     EditorUtility.DisplayDialog("Error", $"Upload {s_AssetBundleFilePathInfos[i].filePath} fail!", "OK");
                     return;
@@ -251,17 +260,13 @@ namespace SecondLive.Maker.Editor
                 return;
             }
 
-            static async Task<bool> UploadSceneBundle(AssetBundleFileInfo info, int index, int maxCount)
+            static async Task<bool> UploadSceneBundle(S3Credentials s3credentials, AssetBundleFileInfo info, int index, int maxCount)
             {
                 if (!File.Exists(info.filePath))
                 {
                     EditorUtility.DisplayDialog("Upload Error", $"{info.filePath} not found.", "OK");
                     return false;
                 }
-                var s3credentials = await UploadManager.instance.CheckS3Credentials(
-                    SpaceManager.instance.m_SpaceWindowModel.CurrentSpaceInfo.guid);
-                if (s3credentials == null)
-                    return false;
 
                 var remotePath = await UploadManager.instance.UploadFileToS3Async(info.filePath, s3credentials,
                     (totla, current) =>
@@ -280,16 +285,6 @@ namespace SecondLive.Maker.Editor
                 info.url = remotePath;
                 return true;
             }
-
-            //static async Task<AssetBundle> DownloadSceneBundle(ulong spaceid)
-            //{
-            //    //if (!File.Exists(guid))
-            //    //{
-            //    //}
-            //    S3Credentials s3credentials = await UploadManager.instance.CheckS3Credentials(instance.m_SpaceWindowModel.CurrentSpaceInfo.guid);
-            //    if (s3credentials == null)
-            //        return null;
-            //}
 
             static string SaveSapceDescriptor(SpaceInfo info, string ourdir)
             {

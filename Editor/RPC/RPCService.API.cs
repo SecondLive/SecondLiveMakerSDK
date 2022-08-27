@@ -89,5 +89,15 @@ namespace SecondLive.Maker.Editor
             });
             return Call<GetSpaceConfig>(Define.Url.GET_SPACE_CONFIG_URL, "POST", UserManager.instance.UserInfo.Token, json);
         }
+
+        public Task<BaseResponse> DeleteSpaceFile(UInt64 spaceId,int fileId,Action<float> progressCallback = null)
+        {
+            var json = JsonMapper.ToJson(new
+            {
+                space_guid = spaceId,
+                file_id = fileId,
+            });
+            return Call<BaseResponse>(Define.Url.DELETE_SPACE_FILE_URL, "POST", UserManager.instance.UserInfo.Token, json);
+        }
     }
 }

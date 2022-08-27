@@ -51,7 +51,6 @@ namespace SecondLive.Maker.Editor
                 var fileLength = inputStream.Length;
                 progressCallback?.Invoke(inputStream.Length, 0);
                 var targetFileName = Path.GetFileName(localFilePath);
-                Debug.Log(s3Credentials.dir);
                 var targetFilePath = s3Credentials.dir + $"/{targetFileName}";
                 Debug.Log($"Upload {localFilePath} to s3://{targetFilePath}");
                 
@@ -60,12 +59,13 @@ namespace SecondLive.Maker.Editor
                 var partTags = new List<PartETag>();
                 var awsCredentials = new SessionAWSCredentials(s3Credentials.accessKey,s3Credentials.secret,s3Credentials.token); 
                 var client = new AmazonS3Client(awsCredentials,Amazon.RegionEndpoint.USEast1);
+
                 var initRequest = new InitiateMultipartUploadRequest
                 {
                     BucketName = s3Credentials.bucket,
                     Key = targetFilePath
-                    
                 };
+                
                 var initResponse = await client.InitiateMultipartUploadAsync(initRequest);
                 var number = 1;
                 while (filePosition < fileLength)
@@ -81,10 +81,6 @@ namespace SecondLive.Maker.Editor
                         InputStream = inputStream,
                         
                     };
-                    //uploadRequest.StreamTransferProgress += (sender, args) =>
-                    //{
-                    //    progressCallback?.Invoke(fileLength,(number - 1) * partSize + args.TransferredBytes);
-                    //};
                     var uploadResponse = await client.UploadPartAsync(uploadRequest);
                     if (uploadResponse.HttpStatusCode != HttpStatusCode.OK)
                     {
@@ -106,7 +102,9 @@ namespace SecondLive.Maker.Editor
                     PartETags = partTags
                 };
                 var compResponse = await  client.CompleteMultipartUploadAsync(compRequest);
-                return compResponse.Location;
+                client.Dispose();
+
+                return compResponse.Location.Replace("metaverses.s3.amazonaws.com", "d31usbtacmd2ho.cloudfront.net");
             }
         }
     }

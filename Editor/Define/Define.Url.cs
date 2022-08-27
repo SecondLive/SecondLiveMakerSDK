@@ -20,6 +20,7 @@ namespace SecondLive.Maker.Editor
             public const string UPLOAD_RESOURCE_URL = API_URL + "/v1/editor/space/file/upload-resource";
             public const string UPLOAD_CONFIG_URL = API_URL + "/v1/editor/space/file/upload-config";
             public const string REMOVE_SPACE_URL = API_URL + "/v1/editor/space/delete";
+            public const string DELETE_SPACE_FILE_URL = API_URL + "/v1/editor/space/file/delete";
             public const string GET_S3_CREDENTIALS = API_URL + "/v1/editor/getS3TempCredentials";
             public static string GET_SPACE_CONFIG_URL => API_URL + "/v1/editor/space/config-file";
 
