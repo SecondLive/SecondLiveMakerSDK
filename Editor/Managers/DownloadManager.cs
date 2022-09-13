@@ -9,65 +9,68 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class DownloadManager
+namespace SecondLive.Maker.Editor
 {
-    public static async Task<byte[]> DownloadSpaceFile(ulong spaceid, int repeatedCount = 0)
+    public class DownloadManager
     {
-        GetSpaceConfig getSpace = await RPCService.instance.GetSpaceConfig(spaceid);
-        if (getSpace != null)
+        public static async Task<byte[]> DownloadSpaceFile(ulong spaceid, int repeatedCount = 0)
         {
-            EditorUtility.DisplayProgressBar(Define.Text.PREVIEW_SPACE_DIALOG_TITLE, "downloading", 0);
-            UnityWebRequest webRequest = UnityWebRequest.Get(getSpace.data);
-            await webRequest.SendWebRequest();
-            if (webRequest.result == UnityWebRequest.Result.Success)
+            GetSpaceConfig getSpace = await RPCService.instance.GetSpaceConfig(spaceid);
+            if (getSpace != null)
             {
-                SpaceDescriptor spaceDescriptor = LitJson.JsonMapper.ToObject<SpaceDescriptor>(webRequest.downloadHandler.text);
-                if (spaceDescriptor != null)
+                EditorUtility.DisplayProgressBar(Define.Text.PREVIEW_SPACE_DIALOG_TITLE, "downloading", 0);
+                UnityWebRequest webRequest = UnityWebRequest.Get(getSpace.data);
+                await webRequest.SendWebRequest();
+                if (webRequest.result == UnityWebRequest.Result.Success)
                 {
-                    string url = null;
-                    for (int i = 0; i < spaceDescriptor.assetBundleUrls.Length; i++)
+                    SpaceDescriptor spaceDescriptor = LitJson.JsonMapper.ToObject<SpaceDescriptor>(webRequest.downloadHandler.text);
+                    if (spaceDescriptor != null)
                     {
-                        if ((Application.platform == RuntimePlatform.WindowsEditor && spaceDescriptor.assetBundleUrls[i].platform == "win") ||
-                            (Application.platform == RuntimePlatform.OSXEditor && spaceDescriptor.assetBundleUrls[i].platform == "mac"))
+                        string url = null;
+                        for (int i = 0; i < spaceDescriptor.assetBundleUrls.Length; i++)
                         {
-                            url = spaceDescriptor.assetBundleUrls[i].url;
-                            break;
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(url))
-                    {
-                        UnityWebRequest webRequestAssetBundle = UnityWebRequest.Get(url);
-                        await webRequestAssetBundle.SendWebRequest();
-                        if (webRequestAssetBundle.result == UnityWebRequest.Result.Success)
-                        {
-                            while (!webRequestAssetBundle.isDone)
+                            if ((Application.platform == RuntimePlatform.WindowsEditor && spaceDescriptor.assetBundleUrls[i].platform == "win") ||
+                                (Application.platform == RuntimePlatform.OSXEditor && spaceDescriptor.assetBundleUrls[i].platform == "mac"))
                             {
-                                await Task.Delay(100);
+                                url = spaceDescriptor.assetBundleUrls[i].url;
+                                break;
                             }
-                            return webRequestAssetBundle.downloadHandler.data;
+                        }
+
+                        if (!string.IsNullOrEmpty(url))
+                        {
+                            UnityWebRequest webRequestAssetBundle = UnityWebRequest.Get(url);
+                            await webRequestAssetBundle.SendWebRequest();
+                            if (webRequestAssetBundle.result == UnityWebRequest.Result.Success)
+                            {
+                                while (!webRequestAssetBundle.isDone)
+                                {
+                                    await Task.Delay(100);
+                                }
+                                return webRequestAssetBundle.downloadHandler.data;
+                            }
                         }
                     }
                 }
             }
-        }
-        repeatedCount++;
-        if (repeatedCount < 3)
-            return await DownloadSpaceFile(spaceid, repeatedCount);
-        else
-        {
-            EditorUtility.DisplayDialog(Define.Text.PREVIEW_SPACE_DIALOG_TITLE, "Preview Failed", Define.Text.DIALOG_BUTTON_OK);
-            return null;
+            repeatedCount++;
+            if (repeatedCount < 3)
+                return await DownloadSpaceFile(spaceid, repeatedCount);
+            else
+            {
+                EditorUtility.DisplayDialog(Define.Text.PREVIEW_SPACE_DIALOG_TITLE, "Preview Failed", Define.Text.DIALOG_BUTTON_OK);
+                return null;
+            }
         }
     }
-}
 
-public static class ExtensionMethods
-{
-    public static System.Runtime.CompilerServices.TaskAwaiter<object> GetAwaiter(this UnityWebRequestAsyncOperation op)
+    public static class ExtensionMethods
     {
-        var tcs = new TaskCompletionSource<object>();
-        op.completed += (obj) => tcs.SetResult(null);
-        return tcs.Task.GetAwaiter();
+        public static System.Runtime.CompilerServices.TaskAwaiter<object> GetAwaiter(this UnityWebRequestAsyncOperation op)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            op.completed += (obj) => tcs.SetResult(null);
+            return tcs.Task.GetAwaiter();
+        }
     }
 }
