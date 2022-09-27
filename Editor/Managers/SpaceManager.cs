@@ -13,6 +13,7 @@ namespace SecondLive.Maker.Editor
     {
         private Object m_2dFramePrefab;
         private Object m_AnimatorPedestalPrefab;
+        private Object m_CameraViewPrefab;
         private SpaceWindowModel m_SpaceWindowModel;
         int currentSelectedIndex;
 
@@ -227,6 +228,18 @@ namespace SecondLive.Maker.Editor
             if (Selection.activeGameObject != null && Selection.activeGameObject.activeInHierarchy)
                 ((GameObject)go).transform.SetParent(Selection.activeGameObject.transform, false);
             Selection.activeObject = go;
+        }
+
+        public Object AddCameraView()
+        {
+            if (m_CameraViewPrefab == null)
+                m_CameraViewPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Packages/com.secondlive.maker/PackageResources/Prefabs/CameraView.prefab");
+            var go = PrefabUtility.InstantiatePrefab(m_CameraViewPrefab);
+            go.name = m_CameraViewPrefab.name;
+            if (Selection.activeGameObject != null && Selection.activeGameObject.activeInHierarchy)
+                ((GameObject)go).transform.SetParent(Selection.activeGameObject.transform, false);
+            Selection.activeObject = go;
+            return go;
         }
     }
 }

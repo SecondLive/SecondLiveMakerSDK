@@ -16,6 +16,7 @@ namespace SecondLive.Maker.Editor
         private const string SECONDLIVE_CREATE_SPACE = "GameObject/" + SECONDLIVE_MAKER_MENU + "/Space";
         private const string SECONDLIVE_ADD_FRAME = "GameObject/" + SECONDLIVE_MAKER_MENU + "/Frame";
         private const string SECONDLIVE_ADD_ANIMATOR_PEDESTAL = "GameObject/" + SECONDLIVE_MAKER_MENU + "/AnimatorPedestal";
+        //private const string SECONDLIVE_ADD_CAMERA_VIEW = "GameObject/" + SECONDLIVE_MAKER_MENU + "/CameraView";
 
         private const string SECONDLIVE_AUTHORIZATION = SECONDLIVE_MAKER_MENU + "/Authorization";
         private const string SECONDLIVE_SPACE_PANEL = SECONDLIVE_MAKER_MENU + "/Space Panel";
@@ -52,6 +53,12 @@ namespace SecondLive.Maker.Editor
         {
             SpaceManager.instance.AddAnimatorPedestal();
         }
+
+       /* [MenuItem(SECONDLIVE_ADD_CAMERA_VIEW, false, 1)]
+        private static void AddCameraView()
+        {
+            PrefabUtility.UnpackPrefabInstance((GameObject)SpaceManager.instance.AddCameraView(), PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+        }&*/
 
         [MenuItem(SECONDLIVE_AUTHORIZATION, false, 100)]
         private static void ShowAccountWindow()

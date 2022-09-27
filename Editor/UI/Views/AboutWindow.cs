@@ -22,11 +22,11 @@ namespace SecondLive.Maker.Editor
             view.styleSheets.Add(styleSheet);
 
             view.Query<Button>("open-document").ForEach(b =>
-                b.clickable.clicked += () => Application.OpenURL("https://secondlive.world/"));
+                b.clickable.clicked += () => Application.OpenURL("https://docs.secondlive.world/creator/space-creator"));
             view.Query<Button>("open-example").ForEach(b =>
                 b.clickable.clicked += () => Application.OpenURL("https://secondlive.world/"));
             view.Query<Button>("join_discord").ForEach(b =>
-                b.clickable.clicked += () => Application.OpenURL("https://secondlive.world/"));
+                b.clickable.clicked += () => Application.OpenURL("https://discord.com/invite/secondlive"));
 
             rootVisualElement.Clear();
             rootVisualElement.Add(view);

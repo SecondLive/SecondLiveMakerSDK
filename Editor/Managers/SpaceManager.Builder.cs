@@ -181,8 +181,8 @@ namespace SecondLive.Maker.Editor
                 BuildAssetBundle(scenePath, outdir, info, BuildTarget.StandaloneWindows);
                 BuildAssetBundle(scenePath, outdir, info, BuildTarget.StandaloneOSX);
                 BuildAssetBundle(scenePath, outdir, info, BuildTarget.WebGL);
-                //BuildAssetBundle(scene,info, BuildTarget.iOS);
-                //BuildAssetBundle(scene,info, BuildTarget.Android);
+                BuildAssetBundle(scenePath, outdir, info, BuildTarget.iOS);
+                BuildAssetBundle(scenePath, outdir, info, BuildTarget.Android);
 
                 EditorUserBuildSettings.SwitchActiveBuildTarget(currentTargetGroup, currentBuildTarget);
             }
