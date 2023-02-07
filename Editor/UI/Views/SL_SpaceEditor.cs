@@ -55,9 +55,11 @@ namespace SecondLive.Maker.Editor
             serializedObject.Update();
             EditorGUILayout.PropertyField(m_RespawnHeightY);
             m_SpawnPointList.DoLayoutList();
-            if(serializedObject.ApplyModifiedProperties())
+            serializedObject.ApplyModifiedProperties();
+            if (GUI.changed)
             {
-
+                SceneView.RepaintAll();
+                EditorUtility.SetDirty(target);
             }
         }
 
@@ -120,7 +122,7 @@ namespace SecondLive.Maker.Editor
 
             if (GUI.changed)
             {
-                SceneView.RepaintAll();
+                EditorUtility.SetDirty(sp);
             }
         }
 
