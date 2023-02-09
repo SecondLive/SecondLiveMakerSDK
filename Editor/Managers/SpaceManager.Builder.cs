@@ -234,8 +234,7 @@ namespace SecondLive.Maker.Editor
             {
                 EditorUtility.DisplayProgressBar("Upload Aasset", "", 0);
 
-                var s3credentials = await UploadManager.instance.CheckS3Credentials(
-                SpaceManager.instance.m_SpaceWindowModel.CurrentSpaceInfo.guid);
+                var s3credentials = await UploadManager.instance.CheckS3Credentials(info.guid);
                 if (s3credentials == null)
                     return;
 
@@ -250,7 +249,7 @@ namespace SecondLive.Maker.Editor
                     return;
                 }
                 var json = SaveSapceDescriptor(info, outdir);
-                var message = await UploadSpaceDescriptor(json);
+                var message = await UploadSpaceDescriptor(json,info);
                 if (!string.IsNullOrEmpty(message))
                     EditorUtility.DisplayDialog("Upload Error", message, "OK");
                 else
@@ -314,10 +313,9 @@ namespace SecondLive.Maker.Editor
                 return json;
             }
 
-            static async Task<string> UploadSpaceDescriptor(string json)
+            static async Task<string> UploadSpaceDescriptor(string json,SpaceInfo info)
             {
-                var response = await RPCService.instance.UploadSceneConfigBundle(
-                    SpaceManager.instance.m_SpaceWindowModel.CurrentSpaceInfo.guid, json);
+                var response = await RPCService.instance.UploadSceneConfigBundle(info.guid, json);
                 if (response.code != 0)
                     return response.message;
                 return string.Empty;
