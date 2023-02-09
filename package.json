@@ -1,11 +1,10 @@
 {
   "author": "SecondLive, Inc.",
   "name": "com.secondlive.maker",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "displayName": "SecondLive Maker",
   "unity": "2021.2",
   "dependencies": {
-    "com.unity.localization": "1.0.5",
     "com.unity.cinemachine": "2.8.4",
     "com.unity.inputsystem": "1.2.0"
   },

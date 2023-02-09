@@ -23,5 +23,6 @@ namespace SecondLive.Maker.Editor
         public string token;
         public string bucket;
         public string dir;
+        public UInt64 spaceId;
     }
 }

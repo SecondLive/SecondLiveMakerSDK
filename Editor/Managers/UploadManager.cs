@@ -22,7 +22,7 @@ namespace SecondLive.Maker.Editor
 
         public async Task<S3Credentials> CheckS3Credentials(UInt64 spaceid)
         {
-            if (m_S3Credentials == null || m_S3Credentials.expire < SystemHelper.NowTimeStamp())
+            if (m_S3Credentials == null || m_S3Credentials.spaceId != spaceid || m_S3Credentials.expire < SystemHelper.NowTimeStamp())
             {
                 var s3 = await RPCService.instance.GetS3Credentials(spaceid);
                 if (s3.code != 0)
@@ -38,6 +38,7 @@ namespace SecondLive.Maker.Editor
                 }
 
                 m_S3Credentials = s3.data;
+                m_S3Credentials.spaceId = spaceid;
             }
             return m_S3Credentials;
         }
